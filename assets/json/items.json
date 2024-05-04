@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "title": "Nordic Chair",
+        "description": "Embrace the simplicity of Scandinavian design with the Nordic Chair. Crafted from sustainable materials, this chair features a minimalist aesthetic that complements any modern decor. Its sleek lines and neutral tones evoke a sense of calm and elegance, perfect for creating a serene workspace.",
+        "price": "14999",
+        "image": "assets\/images\/products\/nordic_chair.png"
+    },
+    {
+        "id": 2,
+        "title": "Kruzo Aero Chair",
+        "description": "The Kruzo Aero Chair is the epitome of contemporary style and comfort. Designed with aerodynamic curves and a breathable mesh back, it offers both a striking look and functional ergonomics. Ideal for long hours at the desk, its adjustable features ensure personalized support.",
+        "price": "29500",
+        "image": "assets\/images\/products\/aero_chair.png"
+    },
+    {
+        "id": 3,
+        "title": "Ergonomic Chair",
+        "description": "Experience the ultimate in comfort with our Ergonomic Chair. Engineered to promote good posture and reduce strain, it boasts adjustable lumbar support, armrests, and a headrest. The high-quality fabric and dense foam padding provide a soft yet supportive seat for all-day use.",
+        "price": 40000,
+        "image": "assets\/images\/products\/ergonomic_chair.png"
+    }
+]

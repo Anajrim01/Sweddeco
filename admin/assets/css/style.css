@@ -1,0 +1,171 @@
+/* Importing the 'Work Sans' font from Google Fonts */
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,500,600,700&display=swap');
+
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 18px;
+    overflow-x: hidden;
+}
+
+/* Admin dashboard styling */
+.card {
+    background-color: #3b5d50;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 8px 5px 5px #3b5d50;
+}
+
+/* Sidebar styling */
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #3b5d50;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 22px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar .side-header {
+    margin-left: 30px;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.sidebar a:hover {
+    background-color: #584e46;
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 2px;
+    font-size: 34px;
+    margin-left: 50px;
+}
+
+.openbtn {
+    font-size: 25px;
+    cursor: pointer;
+    padding: 10px 15px;
+    border: none;
+    color: #fff !important;
+    display: block !important;
+}
+
+@media screen and (max-height: 450px) {
+    .sidebar {
+        padding-top: 15px;
+    }
+    .sidebar a {
+        font-size: 18px;
+    }
+}
+
+/* Product table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    box-shadow: 0 2px 15px rgba(64, 64, 64, .7);
+    border-radius: 12px 12px 0 0;
+    margin-bottom: 50px;
+}
+
+td, th {
+    padding: 10px 16px;
+    text-align: center;
+}
+
+th {
+    background-color: #3b5d50;
+    color: #fafafa;
+    font-family: 'Open Sans', Sans-serif;
+    font-weight: bold;
+}
+
+tr {
+    width: 100%;
+    background-color: #fafafa;
+    font-family: 'Montserrat', sans-serif;
+}
+
+tr:nth-child(even) {
+    background-color: #eeeeee;
+}
+
+/* Card component */
+.card-account {
+    background-color: #ECDAC9;
+    padding: 20px 25px 30px;
+    margin: 0 auto 25px;
+    margin-top: 40px;
+    border-radius: 2px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.profile-img-card {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    border-radius: 50%;
+}
+
+/* Box component */
+.box {
+    position: relative;
+    background-color: #000;
+}
+
+.image {
+    opacity: 1;
+    display: block;
+    max-width: 100%;
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
+    object-fit: contain;
+}
+
+.middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.box:hover .image {
+    opacity: 0.3;
+}
+
+.box:hover .middle {
+    opacity: 1;
+}
+
+.text {
+    background-color: #562700;
+    color: #fff;
+    font-size: 16px;
+    padding: 6px;
+    border-radius: 5px;
+}
