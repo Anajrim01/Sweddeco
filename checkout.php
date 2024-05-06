@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$isAdmin = 0; // Set default value
 
 	// Check if user is logged in or not
-	if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+	if (!isset($_SESSION["loggedin"])) {
 		$email = trim($_POST['c_email_address']);
 		$password = password_hash(trim($_POST['c_account_password']), PASSWORD_DEFAULT);
 		$contactNo = trim($_POST['c_phone']);
@@ -162,7 +162,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	<div class="sweddeco_co-section">
 		<div class="container">
 
-			<?php if (!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]): ?>
+			<?php if (!isset($_SESSION["loggedin"])) { ?>
 				<div class="row mb-5">
 					<div class="col-md-12">
 						<div class="border p-4 rounded" role="alert">
@@ -171,7 +171,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 						</div>
 					</div>
 				</div>
-			<?php endif; ?>
+				<?php
+			} ?>
 
 			<form class="row" id="checkoutForm" method="POST">
 				<div class="col-md-6 mb-5 mb-md-0">
@@ -229,7 +230,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 							</div>
 						</div>
 
-						<?php if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true): ?>
+						<?php if (!isset($_SESSION["loggedin"])) { ?>
 							<div class="form-group row mb-5">
 								<div class="col-md-6">
 									<label for="c_email_address" class="text-black">Email Address <span
@@ -256,7 +257,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 									</div>
 								</div>
 							</div>
-						<?php endif; ?>
+						<?php } ?>
 
 						<div class="form-group">
 							<label for="c_order_notes" class="text-black">Order Notes</label>

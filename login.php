@@ -5,96 +5,99 @@ $errors = null;
 
 // Check if the user has requested to logout
 if (isset($_GET["logout"])) {
-    // Clear all session variables
-    $_SESSION = array();
+	// Clear all session variables
+	$_SESSION = array();
 
-    // Destroy the session
-    session_destroy();
+	// Destroy the session
+	session_destroy();
 }
 
 // Include the database connection file
 require_once './admin/config/dbconnect.php';
 
 // Check if the user is already logged in
-if (isset($_SESSION["phone"])) {
-    if (isset($_SESSION["admin"])) {
-        // Redirect to the admin page
-        header("Location: ./admin");
-        exit;
-    } else {
-        die("<h1>This is currently under the works. To manage your order kindly contact support :)</h1><br><h2><a href='?logout'>Logout</a></h2>");
-    }
+if (isset($_SESSION["loggedin"])) {
+	if ($_SESSION["loggedin"]) {
+		if (isset($_SESSION["admin"])) {
+			// Redirect to the admin page
+			header("Location: ./admin");
+			exit;
+		} else {
+			die("<h1>This is currently under the works. To manage your order kindly contact support :)</h1><br><h2><a href='?logout'>Logout</a></h2>");
+		}
+	}
 }
 
 // Check if the form was submitted
 if (isset($_POST['email']) && isset($_POST['password'])) {
-    // Get user input
-    $userEmail = $_POST['email'];
-    $userPassword = $_POST['password'];
+	// Get user input
+	$userEmail = $_POST['email'];
+	$userPassword = $_POST['password'];
 
-    // Prepare a select statement
-    $sql = "SELECT user_id, first_name, contact_no, password, isAdmin FROM users WHERE email = ?";
+	// Prepare a select statement
+	$sql = "SELECT user_id, first_name, contact_no, password, isAdmin FROM users WHERE email = ?";
 
-    if ($stmt = $conn->prepare($sql)) {
-        // Bind variables to the prepared statement as parameters
-        $stmt->bind_param("s", $param_email);
+	if ($stmt = $conn->prepare($sql)) {
+		// Bind variables to the prepared statement as parameters
+		$stmt->bind_param("s", $param_email);
 
-        // Set parameters
-        $param_email = $userEmail;
+		// Set parameters
+		$param_email = $userEmail;
 
-        // Attempt to execute the prepared statement
-        if ($stmt->execute()) {
-            // Store result
-            $stmt->store_result();
+		// Attempt to execute the prepared statement
+		if ($stmt->execute()) {
+			// Store result
+			$stmt->store_result();
 
-            // Check if email exists, if yes then verify password
-            if ($stmt->num_rows == 1) {
-                // Bind result variables
-                $stmt->bind_result($id, $firstName, $phone, $hashedPassword, $admin);
-                if ($stmt->fetch()) {
-                    if (password_verify($userPassword, $hashedPassword)) {
-                        // Store data in session variables
-                        $_SESSION["loggedin"] = true;
-                        $_SESSION["user_id"] = $id;
-                        $_SESSION["phone"] = $phone;
-                        $_SESSION["firstName"] = $firstName;
+			// Check if email exists, if yes then verify password
+			if ($stmt->num_rows == 1) {
+				// Bind result variables
+				$stmt->bind_result($id, $firstName, $phone, $hashedPassword, $admin);
+				if ($stmt->fetch()) {
+					if (password_verify($userPassword, $hashedPassword)) {
+						// Store data in session variables
+						$_SESSION["loggedin"] = true;
+						$_SESSION["user_id"] = $id;
+						$_SESSION["phone"] = $phone;
+						$_SESSION["firstName"] = $firstName;
 
-                        if (isset($_GET['return'])) {
-                            $returnUrl = urldecode($_GET['return']);
-                            if ($admin) $_SESSION["admin"] = $admin;
-                            header('Location: ' . $returnUrl);
-                            exit;
-                        } else {
-                            if ($admin) {
-                                $_SESSION["admin"] = $admin;
-                                // Redirect admin to admin page
-                                header("Location: ./admin");
-                                exit;
-                            } else {
-                                // todo. Make a user page to manage their orders
-                                exit;
-                            }
-                        }
+						if (isset($_GET['return'])) {
+							$returnUrl = urldecode($_GET['return']);
+							if ($admin)
+								$_SESSION["admin"] = $admin;
+							header('Location: ' . $returnUrl);
+							exit;
+						} else {
+							if ($admin) {
+								$_SESSION["admin"] = $admin;
+								// Redirect admin to admin page
+								header("Location: ./admin");
+								exit;
+							} else {
+								// todo. Make a user page to manage their orders
+								exit;
+							}
+						}
 
-                    } else {
-                        // Display an error message if password is not valid
-                        $errors = "Invalid email or password. Please try again.";
-                    }
-                }
-            } else {
-                // Display an error message if email doesn't exist
-                $errors = "Invalid email or password. Please try again.";
-            }
-        } else {
-            $errors = "Oops! Something went wrong. Please try again later.";
-        }
+					} else {
+						// Display an error message if password is not valid
+						$errors = "Invalid email or password. Please try again.";
+					}
+				}
+			} else {
+				// Display an error message if email doesn't exist
+				$errors = "Invalid email or password. Please try again.";
+			}
+		} else {
+			$errors = "Oops! Something went wrong. Please try again later.";
+		}
 
-        // Close statement
-        $stmt->close();
-    }
+		// Close statement
+		$stmt->close();
+	}
 
-    // Close connection
-    $conn->close();
+	// Close connection
+	$conn->close();
 }
 ?>
 
@@ -227,7 +230,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 		<div class="container relative">
 			<div class="row g-5 mb-5">
 				<div class="col-lg-4">
-				<div class="mb-4 footer-logo-wrap"><a href="./" class="footer-logo">Sweddeco<span>.</span></a></div>
+					<div class="mb-4 footer-logo-wrap"><a href="./" class="footer-logo">Sweddeco<span>.</span></a></div>
 					<p class="mb-4">At Sweddeco, we create exceptional interior spaces that blend style,
 						functionality, and comfort.
 						Our curated collection of furniture and decor is crafted with excellent materials, ensuring
